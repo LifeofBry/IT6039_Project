@@ -37,9 +37,12 @@ public class Manifest {
         }
     }
     
+     /**
+      * Removed -1 from quantities.put(p,quantities.get(p)-1);
+      */
     public void removeProduct(Product p) {
         if (quantities.containsKey(p) && quantities.get(p) > 0) {
-            quantities.put(p,quantities.get(p)-1);
+            quantities.put(p,quantities.get(p));
         }
         if (quantities.get(p) == 0) {
             quantities.remove(p);
@@ -82,7 +85,7 @@ public class Manifest {
             result.append(quantities.get(p));
             result.append("\n");
         }
-        return result.substring(0, result.length()-1);
+        return result.substring(0, result.length());
     }
     
     public boolean hasFragileItems() {
@@ -93,6 +96,9 @@ public class Manifest {
         }
         return false;
     }
+    /**
+     * Added extra } below that was missing 
+     */
 }
     
 
