@@ -40,8 +40,11 @@ public class ProductWeightComparatorTest {
     /**
      * Test of compare method, of class ProductWeightComparator.
      */
-    @Test
-    public void testCompare() {
+    
+   /**
+     * Changed code:
+     * 
+     * public void testCompare() {
         System.out.println("compare");
         Product a = null;
         Product b = null;
@@ -51,6 +54,29 @@ public class ProductWeightComparatorTest {
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
+     * 
+     * to
+     * 
+     * public void testCompare() {
+        System.out.println("compare");
+        Product a = new Product("Box", 4, true, false);
+        Product b = new Product("Box", 4, true, false);
+     
+        ProductWeightComparator instance = new ProductWeightComparator();
+        int expResult = 0;
+        int result = instance.compare(a, b);
+        assertEquals(expResult, result);
+     */
+    @Test
+    public void testCompare() {
+        System.out.println("compare");
+        Product a = new Product("Box", 4, true, false);
+        Product b = new Product("Box", 4, true, false);
+     
+        ProductWeightComparator instance = new ProductWeightComparator();
+        int expResult = 0;
+        int result = instance.compare(a, b);
+        assertEquals(expResult, result);
     }
     
 }
