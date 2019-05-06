@@ -5,12 +5,9 @@
  */
 package packer;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 
 /**
  *
@@ -18,50 +15,30 @@ import static org.junit.Assert.*;
  */
 public class BoxTest {
     
-    public BoxTest() {
-    }
+    // Test data
+    Product a1 = new Product("Alpha", 0, true, true);
+    Product a2 = new Product("Alpha", 2, true, true);
+    Product a3 = new Product("Alpha", 3, false, true);
+    Product a4 = new Product("Alpha", 4, true, false);
     
+    Product b1 = new Product("Beta", 0, true, true);
+    Product b2 = new Product("Beta", 2, true, true);
+    Product b3 = new Product("Beta", 3, false, true);
+    Product b4 = new Product("Beta", 4, true, false);
+        
     @BeforeClass
     public static void setUpClass() {
+        System.out.println("Testing Product class...");
     }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
     /**
      * Test of addProduct method, of class Box.
      */
     @Test
     public void testAddProduct_Product() {
         System.out.println("addProduct");
-        Product product = null;
-        Box instance = null;
-        instance.addProduct(product);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of addProduct method, of class Box.
-     */
-    @Test
-    public void testAddProduct_Product_int() {
-        System.out.println("addProduct");
-        Product product = null;
-        int quantity = 0;
-        Box instance = null;
-        instance.addProduct(product, quantity);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Product p = new Product("Screws", 3, true, true);
+        Manifest instance = new Manifest();
+        instance.addProduct(p, 12);
     }
 
     /**
@@ -72,10 +49,9 @@ public class BoxTest {
         System.out.println("getLabel");
         Box instance = null;
         String expResult = "";
-        String result = instance.getLabel();
+        String result;
+        result = instance.getLabel();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -84,26 +60,38 @@ public class BoxTest {
     @Test
     public void testToString() {
         System.out.println("toString");
-        Box instance = null;
+        Manifest instance = new Manifest();
         String expResult = "";
-        String result = instance.toString();
+        String result;
+        result = instance.toString();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
+    @Test
+    public void testEquals() {
+        assertEquals(true, a1.equals(a1));
+        assertEquals(true, a2.equals(a1));
+        assertEquals(true, a3.equals(a1));
+        assertEquals(true, a4.equals(a1));
+
+        assertEquals(false, b1.equals(a1));
+        assertEquals(false, b2.equals(a1));
+        assertEquals(false, b3.equals(a1));
+        assertEquals(false, b4.equals(a1));
+        
+        assertEquals(false, b2.equals(a2));
+        assertEquals(false, b3.equals(a3));
+        assertEquals(false, b4.equals(a4)); 
+    }
+    
     /**
      * Test of getWeight method, of class Box.
      */
-    @Test
+     @Test
     public void testGetWeight() {
-        System.out.println("getWeight");
-        Box instance = null;
-        double expResult = 0.0;
-        double result = instance.getWeight();
-        assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(2, a2.getWeight());
+        assertEquals(3, a3.getWeight());
+        assertEquals(4, a4.getWeight());
     }
 
     /**
@@ -112,13 +100,15 @@ public class BoxTest {
     @Test
     public void testCanFit_Product() {
         System.out.println("canFit");
-        Product p = null;
-        Box instance = null;
-        boolean expResult = false;
-        boolean result = instance.canFit(p);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Product p = new Product("Screws", 41, true, true);
+        Coordinates Coordinates1 = new Coordinates(1000, 2000);
+        Address Address1 = new Address("1 First St", "Aplace", "Citadel City", "A111", Coordinates1);
+        Customer Customer1 = new Customer("Customer1", Address1);
+        Depot Depot0 = new Depot("Depot0", Address1);
+        
+        Box b = new Box(Customer1,Depot0);
+        
+        assertEquals(false, b.canFit(p));
     }
 
     /**
@@ -127,14 +117,15 @@ public class BoxTest {
     @Test
     public void testCanFit_Product_int() {
         System.out.println("canFit");
-        Product p = null;
-        int quantity = 0;
-        Box instance = null;
-        boolean expResult = false;
-        boolean result = instance.canFit(p, quantity);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Product p = new Product("Screws", 5, true, true);
+        Coordinates Coordinates2 = new Coordinates(30,40);
+        Address Address2 = new Address("123 Count St", "Brooklyn", "Welling Town", "B222", Coordinates2);
+        Customer Customer2 = new Customer("Test Customer", Address2);
+        Depot Depot4 = new Depot("Depot4", Address2);
+        
+        Box b = new Box(Customer2,Depot4);
+        
+        assertEquals(true, b.canFit(p));
     }
 
     /**
@@ -145,10 +136,9 @@ public class BoxTest {
         System.out.println("remainingCapacity");
         Box instance = null;
         double expResult = 0.0;
-        double result = instance.remainingCapacity();
+        double result;
+        result = instance.remainingCapacity();
         assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -156,13 +146,8 @@ public class BoxTest {
      */
     @Test
     public void testIsFragile() {
-        System.out.println("isFragile");
-        Box instance = null;
-        boolean expResult = false;
-        boolean result = instance.isFragile();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(true,a1.isFragile());
+        assertEquals(false,a4.isFragile());
     }
 
     /**
@@ -170,13 +155,8 @@ public class BoxTest {
      */
     @Test
     public void testIsHazardous() {
-        System.out.println("isHazardous");
-        Box instance = null;
-        boolean expResult = false;
-        boolean result = instance.isHazardous();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(true,a1.isHazardous());
+        assertEquals(false,a3.isHazardous());
     }
     
 }
