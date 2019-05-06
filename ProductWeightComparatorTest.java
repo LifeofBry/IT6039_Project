@@ -59,8 +59,8 @@ public class ProductWeightComparatorTest {
      * 
      * public void testCompare() {
         System.out.println("compare");
-        Product a = new Product("Box", 4, true, false);
-        Product b = new Product("Box", 4, true, false);
+        Product a = new Product("Screws", 4, true, false);
+        Product b = new Product("Screws", 4, true, false);
      
         ProductWeightComparator instance = new ProductWeightComparator();
         int expResult = 0;
@@ -70,8 +70,8 @@ public class ProductWeightComparatorTest {
     @Test
     public void testCompare() {
         System.out.println("compare");
-        Product a = new Product("Box", 4, true, false);
-        Product b = new Product("Box", 4, true, false);
+        Product a = new Product("Screws", 4, true, false);
+        Product b = new Product("Screws", 4, true, false);
      
         ProductWeightComparator instance = new ProductWeightComparator();
         int expResult = 0;
