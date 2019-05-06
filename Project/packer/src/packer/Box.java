@@ -45,19 +45,44 @@ public class Box {
         return label.toString();
     }
     
+    /**
+     *
+     * @return the label
+     */
+    @Override
     public String toString() {
         return getLabel();
     }
     
+   /** Changed:
     public double getWeight() {
         return contents.getWeight();
     }
     
+    to
+    
+    public double getWeight() {
+        return contents.getTotalWeight();
+    }
+    
+    
+     * @return the total weight
+    */
+    
+    public double getWeight() {
+        return contents.getTotalWeight();
+    }
+    
+     /** Removed the following as was double up:
     public void addProduct(Product product) {
         if (canFit(product)) {
             contents.addProduct(product, 1);
         }
     }
+    
+     * @param p how many products it can fit
+     * @return the weight
+    */
     
     public boolean canFit(Product p) {
         return p.getWeight() < 40;

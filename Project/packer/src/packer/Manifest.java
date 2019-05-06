@@ -37,12 +37,13 @@ public class Manifest {
         }
     }
     
+     /**
+      * Removed -1 from quantities.put(p,quantities.get(p)-1);
+     * @param p removing product
+      */
     public void removeProduct(Product p) {
         if (quantities.containsKey(p) && quantities.get(p) > 0) {
-            quantities.put(p,quantities.get(p)-1);
-        }
-        if (quantities.get(p) == 0) {
-            quantities.remove(p);
+            quantities.put(p,quantities.get(p));
         }
         if (quantities.containsKey(p)) {
             byWeight.remove(p);
@@ -74,18 +75,35 @@ public class Manifest {
         return quantities.containsKey(p) && quantities.get(p) > 0;
     }
     
+    /**
+     * Changed:
+     * for (Product p : quantities.keySet()) {
+     * 
+     * to
+     * 
+     * quantities.keySet().stream().map((p) - {
+     * 
+     * @return total result of product manifest
+     */
+    @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        for (Product p : quantities.keySet()) {
+        quantities.keySet().stream().map((p) -> {
             result.append(p.getName());
+            return p;
+        }).map((p) -> {
             result.append(" x ");
             result.append(quantities.get(p));
+            return p;
+        }).forEachOrdered((_item) -> {
             result.append("\n");
-        }
-        return result.substring(0, result.length()-1);
+        });
+        return result.substring(0, result.length());
     }
     
-    public boolean hasFragileItems() {
+    /**
+     * Re factored code:
+     * public boolean hasFragileItems() {
         for (Product p : quantities.keySet()) {
             if (p.isFragile()) {
                 return true;
@@ -93,5 +111,21 @@ public class Manifest {
         }
         return false;
     }
+     * 
+     * to
+     * 
+     *  public boolean hasFragileItems() {
+        return quantities.keySet().stream().anyMatch((p) - (p.isFragile()));
+    }
+     * 
+     * @return fragile items
+     */
+    public boolean hasFragileItems() {
+        return quantities.keySet().stream().anyMatch((p) -> (p.isFragile()));
+    }
+    /**
+     * Added extra } below that was missing 
+     */
+}
     
 

@@ -25,13 +25,21 @@ public class Customer {
     public String getName() {
         return name;
     }
-
+/**
+ * 
+ * Added:
+ * 
+ * bestDistance = distance;
+     * @param d find closest address to depot
+     * @return best address
+ */   
     public Address getClosestAddressTo(Depot d) {
         double bestDistance = Double.MAX_VALUE;
         Address bestAddress = null;
         for (Address a : addresses) {
             double distance = a.getCoordinates().companyDistanceTo(d.getCoordinates());
             if (distance < bestDistance) {
+                bestDistance = distance;
                 bestAddress = a;
             }
         }

@@ -5,11 +5,11 @@ package packer;
  * @author Bryan
  */
 public class Address {
-    private String street;
-    private String suburb;
-    private String city;
-    private String postcode;
-    private Coordinates coordinates;
+    private final String street;
+    private final String suburb;
+    private final String city;
+    private final String postcode;
+    private final Coordinates coordinates;
 
     public Address(String street, String suburb, String city, String postcode, Coordinates coordinates) {
         this.street = street;
@@ -19,6 +19,11 @@ public class Address {
         this.coordinates = coordinates;
     }
 
+    /**
+     *
+     * @return the address
+     */
+    @Override
     public String toString() {
         return 
                 street + "\n" +

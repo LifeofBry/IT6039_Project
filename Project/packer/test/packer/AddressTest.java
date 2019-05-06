@@ -48,6 +48,5 @@ public class AddressTest {
         assertEquals(testCoordinates1, testAddress1.getCoordinates());
         assertEquals(testCoordinates2, testAddress2.getCoordinates());
         assertEquals(testCoordinates3, testAddress3.getCoordinates());
-    }
-    
+    } 
 }

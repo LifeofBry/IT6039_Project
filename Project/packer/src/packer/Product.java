@@ -35,8 +35,21 @@ public class Product {
     /**
      * @return the hazardous
      */
+    /** Changed:
+    
     public boolean isHazardous() {
         return false;
+    }
+
+    to
+
+    public boolean isHazardous() {
+    return hazardous;
+    }
+     * @return hazardous
+    */
+    public boolean isHazardous() {
+        return hazardous;
     }
 
     /**
@@ -46,6 +59,11 @@ public class Product {
         return fragile;
     }
 
+    /**
+     *
+     * @return name
+     */
+    @Override
     public String toString() {
         return this.getName();
     }
